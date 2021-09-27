@@ -1,0 +1,42 @@
+/* fonts */
+@import url(fonts/interweb/inter.css);
+
+/* components */
+@import url(blocks/header.css);
+@import url(blocks/hero.css);
+@import url(blocks/about.css);
+@import url(blocks/technologies.css);
+@import url(blocks/student.css);
+
+
+/* default style */
+
+button{
+  border: none;
+  background-color: inherit;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+}
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+p{
+  color: white;
+}
+
+a{
+  text-decoration: none;
+}
+
+body{
+  margin: 0;
+  padding: 0;
+  font-family: "Inter", Arial, sans-serif;
+  font-weight: normal;
+  font-style: normal;
+}
