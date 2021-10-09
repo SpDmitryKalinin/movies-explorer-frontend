@@ -1,10 +1,10 @@
 import React from 'react';
 
-export default class Header extends React.Component{
+export default class About extends React.Component{
     render(){
         return (
             <section className="about">
-                <h2 className="about__title">О проекте</h2>
+                <h2 className="about__title" id="about">О проекте</h2>
                 <div className="about__info">
                     <div className="about__info-item">
                         <h3 className="about__info-title">Дипломный проект включал 5 этапов</h3>

@@ -1,0 +1,165 @@
+.form-page{
+    width: 100%;
+    background-color: #202020;
+}
+
+.form-container{
+    display: flex;
+    flex-direction: column;
+    max-width: 396px;
+    padding: 70px 0 70px 0;
+    margin: 0 auto;
+    height: 100vh;
+    justify-content: center;
+}
+
+.form__input-name{
+    width: 100%;
+}
+
+.form__input-name .form__name-input{
+    width: 100%;
+}
+
+.form__input-name_disabled{
+    display: none;
+}
+.form-container__logo{
+    width: 38px;
+    height: 38px;
+    margin-bottom: 40px;
+}
+
+.form-container__title{
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 29px;
+    margin-bottom: 40px;
+    color: white;
+}
+
+.form__inputs{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.form__input, .form__input::placeholder{
+    background-color: #202020;
+    margin: 8px 0 20px 0;
+    padding-bottom: 9px;
+    border: none;
+    border-bottom: 1px solid #424242;
+    font-size: 14px;
+    line-height: 17px;
+    color: #FFFFFF;
+}
+
+.form__input-label-text{
+    font-size: 10px;
+    line-height: 12px;   
+    color: #8B8B8B;
+    margin: 0;
+}
+
+
+
+.form__password-error{
+    margin: 0;
+    font-size: 10px;
+    line-height: 12px;
+    color: #EE3465;
+    margin: -9px 0 0 0;
+}
+
+.form__button{
+    width: 100%;
+    padding: 13px 0 13px 0;
+    text-align: center;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    border-radius: 3px;
+    background-color: #4285F4;
+    border: none;
+    color: white;
+}
+
+.form__button:hover{
+    cursor: pointer;
+}
+
+.form__form-footer-container{
+    margin: 15px 0 0 0;
+    font-size: 14px;
+    line-height: 17px;
+    display: flex;
+    justify-content: center;
+}
+
+.form__button-container{
+    margin-top: 134px;
+}
+
+.form__form-footer-text{
+    color: #8B8B8B;
+    text-align: center;
+    margin: 0;
+    margin-right: 16px;
+}
+ 
+.form__form-footer-button{
+    background-color: transparent;
+    border: none;
+    color: #4285F4;
+}
+
+.form__sign-in-button:hover{
+    cursor: pointer;
+}
+
+@media screen and (max-width: 1280px){
+    .form{
+        max-width: 1279px;
+    }
+
+    .form-container{
+        width: 51.5%;
+    }
+    
+}
+
+@media screen and (max-width: 767px){
+    .form{
+        max-width: 767px;
+    }
+
+    .form-container{
+        width: 81%;
+        padding: 55px 0 0 0;
+    }
+
+    .form__logo-box{
+        display: flex;
+    }
+
+    .form__logo{
+        margin: auto;
+    }
+
+    .form__title{
+        text-align: center;
+        margin: 50px 0 80px 0;
+    }
+    .form__button{
+        font-size: 12px;
+        line-height: 15px;
+        padding: 15px 0 15px 0;
+    }
+
+    .form__sign-in-container{
+        margin: 13px 0 30px 0;
+        font-size: 12px;
+        line-height: 15px;
+    }
+}

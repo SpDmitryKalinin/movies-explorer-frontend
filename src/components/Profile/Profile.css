@@ -1,0 +1,131 @@
+.profile{
+    max-width: 1280px;
+    margin: 0 auto;
+    background-color: #202020;
+    display: flex;
+    color: white;
+}
+
+.profile__container{
+    width: 31.9%;
+    margin: auto;
+    padding-bottom: 65px;
+}
+
+.profile__title{
+    margin: 0;
+    text-align: center;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 29px;;
+    padding: 89px 0 115px 0;
+}
+
+.profile__inputs{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    font-weight: 500;
+    font-size: 11px;
+    line-height: 13px;
+    padding-bottom: 211px;
+    color: white;
+}
+
+.profile__input-container{
+    display: flex;
+    justify-content: space-between;
+}
+
+.profile__input{
+    background-color: transparent;
+    border: none;
+    text-align: right;
+    color: white;
+    width: 100%;
+}
+
+.profile__input-label{
+    display: none;
+}
+
+.profile__input-container-name{
+    margin-bottom: 7px;
+}
+
+.profile__line{
+    border-bottom: 1px solid #424242;
+    margin-bottom: 5px;
+}
+
+.profile__buttons{
+    display: flex;
+    flex-direction: column;
+    font-size: 13px;
+    line-height: 16px;
+}
+
+.profile__button-redact{
+    border: none;
+    background-color: transparent;
+    color: white;
+    margin-bottom: 15px;
+}
+
+.profile__button-redact:hover{
+    cursor: pointer;
+}
+
+.profile__button-exit{
+    border: none;
+    background-color: transparent;
+    color: #EE3465;
+}
+
+.profile__button-exit:hover{
+    cursor: pointer;
+}
+
+::placeholder{
+    font-size: 11px;
+    line-height: 13px;
+}
+
+@media screen and (max-width: 1280px){
+    .profile{
+        max-width: 1279px;
+    }
+
+    .profile__container{
+        width: 53%;
+        margin: auto;
+        padding-bottom: 65px;
+    }
+
+    .profile__title{
+        padding: 255px 0 85px 0;
+    }
+
+    .profile__inputs{
+        padding-bottom: 200px;
+    }
+}
+
+@media screen and (max-width: 768px){
+    .profile{
+        max-width: 767px;
+    }
+
+    .profile__container{
+        width: 81%;
+        padding-bottom: 35px;
+    }
+
+    .profile__title{
+        padding: 91px 0 67px 0;
+    }
+
+    .profile__inputs{
+        padding-bottom: 369px;
+    }
+}
