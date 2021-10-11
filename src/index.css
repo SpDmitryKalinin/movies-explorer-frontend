@@ -1,0 +1,70 @@
+/* fonts */
+@import url(fonts/interweb/inter.css);
+
+/* components */
+@import url(vendor/normalize.css);
+@import url(components/Hero/hero.css);
+@import url(components/About/about.css);
+@import url(components/Technologies/technologies.css);
+@import url(components/Student/student.css);
+@import url(components/Portfolio/portfolio.css);
+@import url(components/Footer/footer.css);
+@import url(components/Form/form.css);
+@import url(components/HeaderMain/header-main.css);
+@import url(components/Header/Header.css);
+@import url(components/SearchForm/SearchForm.css);
+@import url(components/Card/card.css);
+@import url(components/CardList/card-list.css);
+@import url(components/Card/card.css);
+@import url(components/Menu/menu.css);
+@import url(components/Error/Error.css);
+@import url(components/Profile/Profile.css);
+
+/* default style */
+
+html{
+  scroll-behavior: smooth;
+}
+button{
+  border: none;
+  background-color: inherit;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+}
+
+button:hover{
+  opacity: 0.5;
+}
+
+body{
+  background-color: #202020;
+}
+
+
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+p{
+  color: white;
+}
+
+a{
+  text-decoration: none;
+}
+
+a:hover{
+  opacity: 0.5;
+}
+
+body{
+  margin: 0;
+  padding: 0;
+  font-family: "Inter", Arial, sans-serif;
+  font-weight: normal;
+  font-style: normal;
+}
