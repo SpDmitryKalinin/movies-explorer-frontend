@@ -20,7 +20,7 @@ export default class Card extends React.Component{
                 this.saveCard(e);
                 }} >
                 <div className="card__img">
-                    <img className="card__img-item" src={cardimg}/>
+                    <img className="card__img-item" src={cardimg} alt="Изображение на карточке"/>
                     <span className={this.props.status ? "card__save-message" : "card__save-message_disactive"}>Сохранить</span>
                     <span className={this.props.status ? "card__mark" : "card__mark__hidden"}>
                         <img src={markimg} alt="Значок сохранено"></img>
