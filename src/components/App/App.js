@@ -25,22 +25,22 @@ export default class App extends React.Component{
                 </Route>
 
                 <Route path="/movies">
-                    <Movies/>
+                    <Movies status={true}/>
                 </Route>
 
                 <Route path="/saved-movies">
-                    <Movies/>
+                    <Movies status={false}/>
                 </Route>
 
                 <Route path="/profile">
                     <Profile/>
                 </Route>
                 
-                
                 <Route exact path="/">
                     <HeaderMain/>
                     <Main/>
                 </Route>
+                
                 <Route path="/">
                     <Error/>
                 </Route>

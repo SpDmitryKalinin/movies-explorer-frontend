@@ -6,10 +6,12 @@ export default class searchForm extends React.Component{
         return (
             <section className="search-form-container">
                 <form className="search-form">
-                    <input placeholder="Фильм" className="search-form__input"></input>
-                    <button type="submit" className="search-form__button">
-                        <img src={Button} alt="Кнопка поиска"/>
-                    </button>
+                    <div className="search-from__input-container">
+                        <input placeholder="Фильм" className="search-form__input" required></input>
+                        <button type="submit" className="search-form__button">
+                            <img src={Button} alt="Кнопка поиска"/>
+                        </button>
+                    </div>
                     <div className="search-form__filter">
                         <p className="search-form__filter-description">Короткометражки</p>
                         <label className="serch-form__checkbox-style">

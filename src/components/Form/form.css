@@ -17,9 +17,13 @@
     width: 100%;
 }
 
+
+
 .form__input-name .form__name-input{
     width: 100%;
 }
+
+
 
 .form__input-name_disabled{
     display: none;
@@ -55,14 +59,16 @@
     color: #FFFFFF;
 }
 
+.form__input::placeholder{
+    color: white;  
+}
+
 .form__input-label-text{
     font-size: 10px;
     line-height: 12px;   
     color: #8B8B8B;
     margin: 0;
 }
-
-
 
 .form__password-error{
     margin: 0;
@@ -133,7 +139,9 @@
     .form{
         max-width: 767px;
     }
-
+    .form-container__logo{
+        margin: 0 auto 50px;
+    }
     .form-container{
         width: 81%;
         padding: 55px 0 0 0;
@@ -161,5 +169,11 @@
         margin: 13px 0 30px 0;
         font-size: 12px;
         line-height: 15px;
+    }
+    .form-container__title{
+        text-align: center;
+    }
+    .form__form-footer-container{
+        padding-bottom: 30px;
     }
 }

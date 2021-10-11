@@ -32,7 +32,7 @@ class Header extends React.Component{
                 <Link to={'/profile'}>
                 <button className="menu__accaunt">
                     <span className="menu__cuption">Аккаунт</span>
-                    <img className="menu__icon" src={icon}/>
+                    <img className="menu__icon" src={icon} alt="Иконка аккаунта"/>
                 </button>
                 </Link>
             </section>

@@ -1,11 +1,43 @@
 .card{
     width: 100%;
+    max-width: 360px;
     display: flex;
     flex-direction: column;
 }
+.card__save-message_disactive{
+    display: none;
+}
+.card__mark{
+    display: none;
+}
 
+.card__mark-delete{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+.card__mark__hidden{
+    display: none;
+}
+.card__mark-delete__hidden{
+    display: none;
+}
+
+
+
+.card-list-container{
+    max-width: 1140px;
+    margin: 0 auto;
+}
 .card:hover .card__save-message{
     display: block
+}
+.card_active:hover .card__save-message{
+    display: none;
+}
+
+.card_active .card__mark{
+    display: block;
 }
 
 .card__img{
@@ -48,4 +80,25 @@
     line-height: 9px;
     border-radius: 30px;
     background: #313131;
+}
+.card__mark__hidden{
+    display: none;
+}
+
+@media screen and (max-width: 1280px){
+    .card-list-container{
+        max-width: 1000px;
+    }
+    .card{
+        max-width: 500px;
+    }
+}
+
+@media screen and (max-width: 768px){
+    .card-list-container{
+        max-width: 400px;
+    }
+    .card{
+        max-width: 400px;
+    }
 }

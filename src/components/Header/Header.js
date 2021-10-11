@@ -32,7 +32,7 @@ export default class Header extends React.Component{
                 <Link to={'/profile'}>
                     <button className="header__accaunt">
                         <span className="header__cuption">Аккаунт</span>
-                        <img className="header__icon" src={icon}/>
+                        <img className="header__icon" src={icon} alt="Иконка аккаунта"/>
                     </button>
                 </Link>
                 
@@ -48,7 +48,13 @@ export default class Header extends React.Component{
     
     toggleMenu(){
         this.setState({menuIsOpen: !this.state.menuIsOpen})
-        document.querySelector('body').setAttribute('style', 'height: 100%; overflow:hidden;')
+        if(!this.state.menuIsOpen){
+            document.querySelector('body').setAttribute('style', 'height: 100%; overflow:hidden;')
+        }
+        else{
+            document.querySelector('body').removeAttribute('style', 'height: 100%; overflow:hidden;')
+        }
+        
     }
 }
 

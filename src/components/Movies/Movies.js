@@ -9,12 +9,15 @@ import CardList from '../CardList/CardList';
 
 
 export default class Movies extends React.Component{
+    constructor(props){
+        super(props);
+    }
     render(){
         return (
             <section className="page-movies">
                 <Header/>
                 <SearchForm/>
-                <CardList/>
+                <CardList status={this.props.status}/>
                 <Footer/>
             </section>
         )
