@@ -2,12 +2,29 @@ import React from 'react';
 import Button from '../../images/find.svg'
 
 export default class searchForm extends React.Component{
+    constructor(props){
+        super(props);
+        this.state = {
+            word: ''
+        }
+    }
+    changeSearchInput(e){
+        this.setState({
+            word: e.target.value
+        })
+    }
     render(){
         return (
             <section className="search-form-container">
-                <form className="search-form">
+                <form onSubmit={(e) => this.props.onSubmit(e, this.state.word)} className="search-form">
                     <div className="search-from__input-container">
-                        <input placeholder="Фильм" className="search-form__input" required></input>
+                        <input 
+                            onChange={this.changeSearchInput.bind(this)} 
+                            value={this.state.word || ""}  
+                            placeholder="Фильм" 
+                            className="search-form__input" 
+                            required="required"
+                        ></input>
                         <button type="submit" className="search-form__button">
                             <img src={Button} alt="Кнопка поиска"/>
                         </button>
@@ -19,7 +36,6 @@ export default class searchForm extends React.Component{
                             <figure className="search-form__figure"></figure>
                         </label>
                     </div>
-                    
                 </form>
             </section>
         )
