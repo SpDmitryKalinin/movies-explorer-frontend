@@ -27,7 +27,13 @@ class App extends React.Component{
         }
     }
     componentDidMount(){
-
+        if(localStorage.getItem("movies")){
+            const newData = JSON.parse(localStorage.getItem('movies'));
+            this.setState(
+            {
+                sortMovies: newData
+            });
+        }
     }
 
     handleSignIn(e){

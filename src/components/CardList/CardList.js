@@ -18,36 +18,31 @@ export default class CardList extends React.Component{
     }
 
     componentDidMount(){
+        document.addEventListener('resize', ()=>{
+            console.log('!!!');
+        })
         this.setState({
             countMovies: checkDevice()[0],
             step: checkDevice()[1],
         })
-        if(localStorage.getItem("movies")){
-            const newData = JSON.parse(localStorage.getItem('movies'));
-            this.setState(
-                {
-                    movies: newData,
-                });
-            setTimeout(() => {this.cutArray()}, 1000);
-        }
+        
     }
 
     componentDidUpdate(){
-        if(this.props.status === true){
-            let copySortArray = this.state.movies;
-            if(this.state.movies !== this.props.movies){
-                this.setState({
-                    movies: this.props.movies
-                })
-            }
-            let copyPrevSortArray = this.state.prevSortArray;
-                if(!diffArrays(copySortArray, copyPrevSortArray) || this.state.prevCount!==this.state.countMovies){
-                    this.setState({
-                        prevSortArray: copySortArray,
-                        prevCount: this.state.countMovies
-                    })
-                    this.cutArray();
-                }
+        let copySortArray = this.state.movies;
+        if(this.state.movies !== this.props.movies){
+            this.setState({
+                movies: this.props.movies
+            })
+        }
+        let copyPrevSortArray = this.state.prevSortArray;
+        if(!diffArrays(copySortArray, copyPrevSortArray) || this.state.prevCount!==this.state.countMovies){
+            console.log('tututatata')
+            this.setState({
+                prevSortArray: copySortArray,
+                prevCount: this.state.countMovies
+            })
+            this.cutArray();
         }
     }
 
@@ -61,7 +56,6 @@ export default class CardList extends React.Component{
         this.setState({
             countMovies: this.state.countMovies + this.state.step
         })
-        setTimeout(() => {console.log(this.state)}, 1000);
     }
 
     preloaderStatus(){
