@@ -12,17 +12,33 @@ export default class Form extends React.Component{
         }
     }
 
+    validation(input){
+        console.log(input);
+        console.log(input.nextSibling);
+        if(input.validationMessage === ''){
+            input.nextSibling.setAttribute("style", 'display:none')
+            input.removeAttribute("style", 'color:#EE3465;')
+        }
+        else{
+            input.setAttribute("style", 'color:#EE3465;')
+            input.nextSibling.textContent = input.validationMessage;
+        }
+    }
+
     changeLogin(e){
+        this.validation(e.target);
         this.setState({
             login: e.target.value
         })
     }
     changePassword(e){
+        this.validation(e.target);
         this.setState({
             password: e.target.value
         })
     }
     changeName(e){
+        this.validation(e.target);
         this.setState({
             name: e.target.value
         })
@@ -35,6 +51,7 @@ export default class Form extends React.Component{
                 <div className="form__input-name">
                     <p className="form__input-label-text">Имя</p>
                     <input
+                        minLength="8"
                         onChange={this.changeName.bind(this)} 
                         value={this.state.name || ""}  
                         className="form__name-input form__input" 
@@ -72,6 +89,7 @@ export default class Form extends React.Component{
 
                             <p className="form__input-label-text">Пароль</p>
                             <input
+                                minLength="8"
                                 onChange={this.changePassword.bind(this)} 
                                 value={this.state.password || ""} 
                                 className="form__password-input form__input" 
