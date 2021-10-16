@@ -18,14 +18,10 @@ export default class CardList extends React.Component{
     }
 
     componentDidMount(){
-        document.addEventListener('resize', ()=>{
-            console.log('!!!');
+        window.addEventListener('resize', ()=>{
+            this.changeCountCard();
         })
-        this.setState({
-            countMovies: checkDevice()[0],
-            step: checkDevice()[1],
-        })
-        
+        this.changeCountCard();
     }
 
     componentDidUpdate(){
@@ -37,13 +33,19 @@ export default class CardList extends React.Component{
         }
         let copyPrevSortArray = this.state.prevSortArray;
         if(!diffArrays(copySortArray, copyPrevSortArray) || this.state.prevCount!==this.state.countMovies){
-            console.log('tututatata')
             this.setState({
                 prevSortArray: copySortArray,
                 prevCount: this.state.countMovies
             })
             this.cutArray();
-        }
+        }        
+    }
+
+    changeCountCard(){
+        this.setState({
+            countMovies: checkDevice()[0],
+            step: checkDevice()[1],
+        })
     }
 
     cutArray(){
@@ -69,14 +71,18 @@ export default class CardList extends React.Component{
                 <div className="card-list">
                     {
                         this.props.loadingStatus ? <Preloader/> :
-                        (this.state.viewMovies.length !== 0 && this.props.status ?
+                        (this.state.viewMovies.length !== 0 ?
                         this.state.viewMovies.map((item =>{
                             return (<Card 
                                 status={this.props.status}
                                 title={item.nameRU}
                                 duration = {item.duration}
-                                img = {'https://api.nomoreparties.co' + item.image.url}
-                                trailer = {item.trailerLink}
+                                img = {this.props.status ?'https://api.nomoreparties.co' + item.image.url : item.image}
+                                trailer = {this.props.status ? item.trailerLink : item.trailer}
+                                info = {item}
+                                saveMovie ={this.props.saveMovie}
+                                deleteMovie ={this.props.deleteMovie}
+                                id = {!this.props.status ? item._id : ""}
                             />)
                         }))
                         :
@@ -84,7 +90,7 @@ export default class CardList extends React.Component{
                     }
                 </div>
                 {
-                    this.state.countMovies >= this.state.movies.length ? "" : <button className="card-list__more-button" onClick={this.moreMovies.bind(this)}>Ещё</button>
+                    this.state.countMovies >= this.state.movies.length? "" : <button className="card-list__more-button" onClick={this.moreMovies.bind(this)}>Ещё</button>
                 }
             </section>
         )

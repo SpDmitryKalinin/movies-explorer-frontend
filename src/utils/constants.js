@@ -1,4 +1,5 @@
-const ADDRESS = 'http://apielmovies.nomoredomains.monster/sign-up';
-const ADDRESSMOVIEAPI = 'https://api.nomoreparties.co/beatfilm-movies'
+const ADDRESS = 'http://apielmovies.nomoredomains.monster';
+const ADDRESSMOVIEAPI = 'https://api.nomoreparties.co/beatfilm-movies';
+const TOKEN = localStorage.getItem('jwt');
 
-export {ADDRESS, ADDRESSMOVIEAPI}
+export {ADDRESS, ADDRESSMOVIEAPI, TOKEN}

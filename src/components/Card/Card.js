@@ -10,11 +10,36 @@ export default class Card extends React.Component{
     }
     saveCard(e){
         let card = e.target.closest('.card');
-        card.classList.toggle('card_active');
+        if(this.props.status){
+            if(card.classList.contains('card_active')){
+                this.props.deleteMovie(card.id)
+            }
+            else{
+                this.props.saveMovie(
+                this.props.info.country, 
+                this.props.info.director, 
+                this.props.info.duration, 
+                this.props.info.year, 
+                this.props.info.description, 
+                'https://api.nomoreparties.co' + this.props.info.image.url, 
+                this.props.info.trailerLink, 'https://api.nomoreparties.co' + 
+                this.props.info.image.formats.thumbnail.url, 
+                this.props.info.id, 
+                this.props.info.nameRU, 
+                this.props.info.nameEN).then(res =>{
+                    card.setAttribute('id', res);
+                })
+            }
+            card.classList.toggle('card_active');
+        }
+        else{
+            this.props.deleteMovie(card.id);
+        }
+        
     }
     render(){
         return (
-            <section className="card" onClick={(e) =>{
+            <section className="card" id={this.props.id} onClick={(e) =>{
                 this.saveCard(e);
                 }} >
                 <div className="card__img">

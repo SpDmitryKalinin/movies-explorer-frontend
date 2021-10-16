@@ -22,7 +22,7 @@ export default class searchForm extends React.Component{
     render(){
         return (
             <section className="search-form-container">
-                <form onSubmit={(e) => this.props.onSubmit(e, this.state.word, this.state.shortStatus)} className="search-form">
+                <form onSubmit={(e) => this.props.onSubmit(e, this.state.word, this.state.shortStatus, this.props.status)} className="search-form">
                     <div className="search-from__input-container">
                         <input 
                             onChange={this.changeSearchInput.bind(this)} 
