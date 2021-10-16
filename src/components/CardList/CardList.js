@@ -24,8 +24,10 @@ export default class CardList extends React.Component{
         })
         if(localStorage.getItem("movies")){
             const newData = JSON.parse(localStorage.getItem('movies'));
-            console.log(newData);
-            this.setState({movies: newData});
+            this.setState(
+                {
+                    movies: newData,
+                });
             setTimeout(() => {this.cutArray()}, 1000);
         }
     }
@@ -33,21 +35,19 @@ export default class CardList extends React.Component{
     componentDidUpdate(){
         if(this.props.status === true){
             let copySortArray = this.state.movies;
-            if(this.state.movies !== this.props.movies && this.props.movies.length!==0){
+            if(this.state.movies !== this.props.movies){
                 this.setState({
                     movies: this.props.movies
                 })
             }
             let copyPrevSortArray = this.state.prevSortArray;
-            if(copySortArray.length!==0){
-                if(copyPrevSortArray.length === 0 || !diffArrays(copySortArray, copyPrevSortArray) || this.state.prevCount!==this.state.countMovies){
+                if(!diffArrays(copySortArray, copyPrevSortArray) || this.state.prevCount!==this.state.countMovies){
                     this.setState({
                         prevSortArray: copySortArray,
                         prevCount: this.state.countMovies
                     })
                     this.cutArray();
                 }
-            }
         }
     }
 
@@ -75,7 +75,7 @@ export default class CardList extends React.Component{
                 <div className="card-list">
                     {
                         this.props.loadingStatus ? <Preloader/> :
-                        this.state.viewMovies.length !== 0 && this.props.status ?
+                        (this.state.viewMovies.length !== 0 && this.props.status ?
                         this.state.viewMovies.map((item =>{
                             return (<Card 
                                 status={this.props.status}
@@ -86,13 +86,12 @@ export default class CardList extends React.Component{
                             />)
                         }))
                         :
-                        ""
+                        <p class="card-list__nothink">Ничего не найдено</p>)
                     }
                 </div>
                 {
                     this.state.countMovies >= this.state.movies.length ? "" : <button className="card-list__more-button" onClick={this.moreMovies.bind(this)}>Ещё</button>
                 }
-                
             </section>
         )
     }
