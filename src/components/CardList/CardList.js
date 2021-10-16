@@ -13,6 +13,7 @@ export default class CardList extends React.Component{
             step: 3,
             prevSortArray: [],
             loading: false,
+            movies: [],
         }
     }
 
@@ -22,13 +23,20 @@ export default class CardList extends React.Component{
             step: checkDevice()[1],
         })
         if(localStorage.getItem("movies")){
-            
+            const newData = JSON.parse(localStorage.getItem('movies'));
+            this.setState({movies: newData});
+            setTimeout(() => {this.cutArray()}, 1000);
         }
     }
 
     componentDidUpdate(){
         if(this.props.status === true){
-            let copySortArray = this.props.movies;
+            let copySortArray = this.state.movies;
+            if(this.state.movies !== this.props.movies && this.props.movies.length!==0){
+                this.setState({
+                    movies: this.props.movies
+                })
+            }
             let copyPrevSortArray = this.state.prevSortArray;
             if(copySortArray.length!==0){
                 if(copyPrevSortArray.length === 0 || !diffArrays(copySortArray, copyPrevSortArray) || this.state.prevCount!==this.state.countMovies){
@@ -44,7 +52,7 @@ export default class CardList extends React.Component{
 
     cutArray(){
         this.setState({
-            viewMovies: this.props.movies.slice(0, this.state.countMovies) 
+            viewMovies: this.state.movies.slice(0, this.state.countMovies) 
         })
     }
 
@@ -52,6 +60,7 @@ export default class CardList extends React.Component{
         this.setState({
             countMovies: this.state.countMovies + this.state.step
         })
+        setTimeout(() => {console.log(this.state)}, 1000);
     }
 
     preloaderStatus(){
@@ -79,7 +88,7 @@ export default class CardList extends React.Component{
                     }
                 </div>
                 {
-                    this.state.countMovies >= this.props.movies.length ? "" : <button className="card-list__more-button" onClick={this.moreMovies.bind(this)}>Ещё</button>
+                    this.state.countMovies >= this.state.movies.length ? "" : <button className="card-list__more-button" onClick={this.moreMovies.bind(this)}>Ещё</button>
                 }
                 
             </section>
