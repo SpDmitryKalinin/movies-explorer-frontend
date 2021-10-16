@@ -67,6 +67,7 @@
     font-size: 11px;
     line-height: 10px;
     background-color: #2F2F2F;
+    min-width: 50px;
 }
 
 .card__save-message{

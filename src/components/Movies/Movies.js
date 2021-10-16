@@ -11,16 +11,15 @@ import CardList from '../CardList/CardList';
 export default class Movies extends React.Component{
     constructor(props){
         super(props);
+        console.log(this.props.loa)
     }
-    componentDidMount(){
-        console.log(this.props);
-    }
+    
     render(){
         return (
             <section className="page-movies">
                 <Header/>
                 <SearchForm onSubmit = {this.props.onSubmit}/>
-                <CardList status={this.props.status}/>
+                <CardList status={this.props.status} movies={this.props.movies} loadingStatus ={this.props.loading}/>
                 <Footer/>
             </section>
         )
