@@ -30,7 +30,7 @@ export default class Card extends React.Component{
                 </div>
                 
                 <div className="card__description">
-                    <p className="card__description-text">{this.props.title}</p>
+                    <a href={this.props.trailer} className="card__description-text">{this.props.title}</a>
                     <span className="card__description-time">{timeCalc(this.props.duration)[0] +"ч " + timeCalc(this.props.duration)[1] +"м"}</span>
                 </div>
             </section>

@@ -23,6 +23,10 @@
     display: none;
 }
 
+.card__description-text{
+    color: white;
+}
+
 
 
 .card-list-container{

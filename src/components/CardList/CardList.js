@@ -24,6 +24,7 @@ export default class CardList extends React.Component{
         })
         if(localStorage.getItem("movies")){
             const newData = JSON.parse(localStorage.getItem('movies'));
+            console.log(newData);
             this.setState({movies: newData});
             setTimeout(() => {this.cutArray()}, 1000);
         }
@@ -81,6 +82,7 @@ export default class CardList extends React.Component{
                                 title={item.nameRU}
                                 duration = {item.duration}
                                 img = {'https://api.nomoreparties.co' + item.image.url}
+                                trailer = {item.trailerLink}
                             />)
                         }))
                         :
