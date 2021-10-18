@@ -24,13 +24,7 @@ export default class Profile extends React.Component{
 
     onSubmit(e){
         e.preventDefault();
-        console.log(this.state.name, this.state.email);
     }
-
-    saveMovies(e){
-        
-    }
-
 
     render(){
         return (

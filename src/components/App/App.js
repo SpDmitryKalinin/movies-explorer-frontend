@@ -41,7 +41,6 @@ class App extends React.Component{
                     sortMovies: newData
                 });
             }
-
         } 
     }
 
@@ -193,7 +192,6 @@ class App extends React.Component{
                 loading: false
             });
         }
-        
     }
 
     handleSubmitEditProfile(e, name, email){

@@ -13,8 +13,6 @@ export default class Form extends React.Component{
     }
 
     validation(input){
-        console.log(input);
-        console.log(input.nextSibling);
         if(input.validationMessage === ''){
             input.nextSibling.setAttribute("style", 'display:none')
             input.removeAttribute("style", 'color:#EE3465;')
