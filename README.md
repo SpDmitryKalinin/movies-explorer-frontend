@@ -1,2 +1,2 @@
-# movies-explorer-frontend
-Репозиторий для frontend части дипломного проекта
+#Ссылка на сайт!
+##http://elmovies.nomoredomains.monster/
