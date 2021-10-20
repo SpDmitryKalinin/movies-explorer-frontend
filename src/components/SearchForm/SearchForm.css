@@ -22,6 +22,15 @@
     flex: 5.5;
 }
 
+.search-form__error{
+    position: relative;
+    top: 10px;
+    color: #EE3465;
+    display: block;
+    width: max-content;
+    margin: 0 auto;
+}
+
 .search-form__input{
     width: 100%;
     display: block;
