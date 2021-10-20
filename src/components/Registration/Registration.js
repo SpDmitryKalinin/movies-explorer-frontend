@@ -11,6 +11,7 @@ export default class Registration extends React.Component{
                 textLink = "Войти"
                 caption = "Уже зарегистрированы?"
                 link = "/sign-in"
+                onSubmit = {this.props.onSubmit}
             >
             </Form>
         )

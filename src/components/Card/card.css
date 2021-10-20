@@ -23,6 +23,10 @@
     display: none;
 }
 
+.card__description-text{
+    color: white;
+}
+
 
 
 .card-list-container{
@@ -67,9 +71,11 @@
     font-size: 11px;
     line-height: 10px;
     background-color: #2F2F2F;
+    min-width: 50px;
 }
 
 .card__save-message{
+    cursor: pointer;
     display: none;
     position: absolute;
     right: 14px;
@@ -91,6 +97,9 @@
     }
     .card{
         max-width: 500px;
+    }
+    .card__save-message{
+        display: block;
     }
 }
 

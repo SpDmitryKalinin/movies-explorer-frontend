@@ -70,7 +70,9 @@
     margin: 0;
 }
 
-.form__password-error{
+
+
+.form__error{
     margin: 0;
     font-size: 10px;
     line-height: 12px;

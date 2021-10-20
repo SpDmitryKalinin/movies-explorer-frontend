@@ -59,6 +59,7 @@
 }
 
 .profile__buttons{
+    margin-top: 200px;
     display: flex;
     flex-direction: column;
     font-size: 13px;
@@ -70,6 +71,7 @@
     background-color: transparent;
     color: white;
     margin-bottom: 15px;
+    position: relative;
 }
 
 .profile__button-redact:hover{
@@ -89,6 +91,23 @@
 ::placeholder{
     font-size: 11px;
     line-height: 13px;
+}
+
+.profile__error{
+    position: absolute;
+    top: -50px;
+    left: 50%;
+    transform: translate(-50%);
+    padding: 5px 10px;
+    background-color: grey;
+    border-radius: 5px;
+    color: #EE3465;
+    pointer-events: none;
+    opacity: 1 !important;
+}
+
+.profile__error_disable{
+    display: none;
 }
 
 @media screen and (max-width: 1280px){
