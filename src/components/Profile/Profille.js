@@ -1,6 +1,6 @@
 import React from 'react';
 import { CurrentUserContext } from '../../currentUserContext/currentUserContext';
-import Header from '../Header/Header';
+const { isEmail } = require('validator');
 
 export default class Profile extends React.Component{
     static contextType = CurrentUserContext;
@@ -9,47 +9,94 @@ export default class Profile extends React.Component{
         this.state ={
             name: '',
             email: '',
+            validName: true,
+            validEmail: true,
+            allValidation: true,
+            validationError: ''
         }
+    }
+    componentDidMount(){
+        this.setState({
+            name: this.context.name,
+            email: this.context.email
+        })
     }
     changeEmail(e){
         this.setState({
             email: e.target.value
         })
+        if(isEmail(e.target.value)){
+            this.setState({
+                validEmail: true
+            })
+        }
+        else{
+            this.setState({
+                validEmail: false,
+                validationError: 'Некорректно введёт email'
+            })
+        }
     }
+
     changeName(e){
         this.setState({
             name: e.target.value
         })
+        if(e.target.value.length>=2){
+            this.setState({
+                validName: true
+            })
+        }
+        else{
+            this.setState({
+                validName: false,
+                validationError: 'Имя должно содержать по крайней мере два символа'
+            })
+        }
+        
     }
 
-    onSubmit(e){
-        e.preventDefault();
+    allValidation(){
+        if(this.state.validEmail && this.state.validName){
+            this.setState({
+                allValidation: true
+            })
+            return true
+        }
+        else{
+            this.setState({
+                allValidation: false
+            })
+            return false
+        }
     }
 
     render(){
         return (
             <section className="profile-page"> 
-                <div class="profile">
-                    <div class="profile__container">
-                        <h1 class="profile__title">{this.context.name}</h1>
-                        <div class="profile__inputs">
-                            <form onSubmit={(e) => this.props.onSubmit(e, this.state.name, this.state.email)}>
-                                <div class="profile__input-container profile__input-container-name">
-                                    <p class="profile__input-label-text">Имя</p>
-                                    <input class="profile__input" type="text" id="name-prof" onChange={this.changeName.bind(this)} placeholder={this.context.name} minLength="8"  required/>
-                                    <label class="profile__input-label" for="name"></label>
+                <div className="profile">
+                    <div className="profile__container">
+                        <h1 className="profile__title">{this.context.name}</h1>
+                        <div className="profile__inputs">
+                            <form onSubmit={(e) => this.props.onSubmit(e, this.state.name, this.state.email, this.allValidation())}>
+                                <div className="profile__input-container profile__input-container-name">
+                                    <p className="profile__input-label-text">Имя</p>
+                                    <input className="profile__input" type="text" id="name-prof" onChange={this.changeName.bind(this)} value={this.state.name} minLength="2"  required/>
+                                    <span className="p"></span>
                                 </div>
 
-                                <div class="profile__line"></div>
+                                <div className="profile__line"></div>
                                 
-                                <div class="profile__input-container">
-                                    <p class="profile__input-label-text">E-mail</p>
-                                    <input class="profile__input" type="email" id="email" onChange={this.changeEmail.bind(this)} placeholder={this.context.email} required/>
-                                    <label class="profile__input-label" for="email"></label>
+                                <div className="profile__input-container">
+                                    <p className="profile__input-label-text">E-mail</p>
+                                    <input className="profile__input" type="email" id="email" onChange={this.changeEmail.bind(this)} value={this.state.email} required/>
+                                    <label className="profile__input-label" for="email"></label>
                                 </div>
-                                <div class="profile__buttons">
-                                    <button class="profile__button-redact" type="submit">Редактировать</button>
-                                    <button class="profile__button-exit" type="button" onClick={this.props.logout}>Выйти из аккаунта</button>
+                                <div className="profile__buttons">
+                                    <button className="profile__button-redact" type="submit" disabled={this.state.allValidation ? "" : "disabled"}>Редактировать 
+                                        <span className={`profile__error ${!this.state.validEmail || !this.state.validName ? "" : "profile__error_disable"}`}>{this.state.validationError}</span>
+                                    </button>
+                                    <button className="profile__button-exit" type="button" onClick={this.props.logout}>Выйти из аккаунта</button>
                                 </div>
                             </form>
                         </div>

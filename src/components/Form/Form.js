@@ -1,14 +1,21 @@
 import React from 'react';
 import logo from '../../images/logo.svg'
 import {Link, withRouter } from 'react-router-dom'; 
+const { isEmail } = require('validator');
 
+//Продолжить здесь
 
 export default class Form extends React.Component{
     constructor(props){
         super(props);
         this.state ={
             login: '',
-            password: ''
+            password: '',
+            name: '',
+            validLogin: false,
+            validPassword: false,
+            validName: false,
+            allValidation: false
         }
     }
 
@@ -40,6 +47,10 @@ export default class Form extends React.Component{
         this.setState({
             name: e.target.value
         })
+    }
+
+    allValidation(){
+
     }
 
     render(){

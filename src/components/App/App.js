@@ -194,10 +194,12 @@ class App extends React.Component{
         }
     }
 
-    handleSubmitEditProfile(e, name, email){
+    handleSubmitEditProfile(e, name, email, allValidation){
         e.preventDefault();
-        api.editProfiltInfo(name, email);
-        this.getInfoUser();
+        if(allValidation){
+            api.editProfiltInfo(name, email);
+            this.getInfoUser();
+        }    
     }
 
     render(){
