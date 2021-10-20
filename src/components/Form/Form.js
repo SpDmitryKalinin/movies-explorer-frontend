@@ -12,11 +12,11 @@ export default class Form extends React.Component{
             login: '',
             password: '',
             name: '',
-            validLogin: false,
-            validPassword: false,
-            validName: false,
-            allValidation: false
+            errorMessage: '',
         }
+    }
+    componentDidUpdate(){
+        console.log(this.state)
     }
 
     validation(input, email){
@@ -57,14 +57,11 @@ export default class Form extends React.Component{
         })
     }
     changeName(e){
+        
         this.validation(e.target, false);
         this.setState({
             name: e.target.value
         })
-    }
-
-    allValidation(){
-
     }
 
     render(){
@@ -125,6 +122,7 @@ export default class Form extends React.Component{
                         </div>
 
                         <div className="form__button-container">
+                            {this.state.errorMessage !== '' ? <span className="form__error-message">{this.state.errorMessage}</span>: ""}
                             <button className="form__button" type="submit">{this.props.textButton}</button>
                         </div>
 

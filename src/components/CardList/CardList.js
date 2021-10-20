@@ -86,7 +86,8 @@ export default class CardList extends React.Component{
                             />)
                         }))
                         :
-                        <p class="card-list__nothink">Ничего не найдено</p>)
+                        this.props.searchStatus ? <p class="card-list__nothink">Ничего не найдено</p> : ""
+                        )
                     }
                 </div>
                 {

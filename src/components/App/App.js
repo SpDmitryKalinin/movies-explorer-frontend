@@ -28,6 +28,7 @@ class App extends React.Component{
             loading: false,
             login: true,
             saveMovies: [],
+            tempSaveMovies: [],
         }
     }
     componentDidMount(){
@@ -57,9 +58,9 @@ class App extends React.Component{
     getSaveMovies(){
         api.getMovies().then(res =>{
             this.setState({
-                saveMovies: res
+                saveMovies: res,
+                tempSaveMovies: res,
             })
-            console.log(res);
         })
     }
 
@@ -90,34 +91,39 @@ class App extends React.Component{
 
 
     handleSignIn(e){
-        e.preventDefault();
+        e.preventDefault()
         auth('', this.state.login, this.state.password, './signin')
         .then(res =>{
             const jwt = res.token;
             localStorage.setItem('jwt', jwt);
             window.location.href = '/movies';
+
         })
         .catch(res =>{
-            console.log(res);
+            this.setState({
+                errorMessage: res
+            })
         })
     }
 
     handleSignUp(e){
-        e.preventDefault();
-        auth(this.state.name, this.state.login, this.state.password, './signup')
+        e.preventDefault()
+        return auth(this.state.name, this.state.login, this.state.password, './signup')
         .then(res =>{
-            auth('', this.state.login, this.state.password, './signin')
+            return auth('', this.state.login, this.state.password, './signin')
             .then(res =>{
                 const jwt = res.token;
                 localStorage.setItem('jwt', jwt);
                 window.location.href = '/movies';
             })
             .catch(res =>{
-                console.log(res);
+                return res
             })
         })
         .catch(res =>{
-            console.log(res);
+            this.setState({
+                errorMessage: res
+            })
         })
     }
 
@@ -156,19 +162,22 @@ class App extends React.Component{
             setTimeout(() => {this.sort(this.state.movies, word, short, status)}, 1000);
         }
         else{
-            setTimeout(() => {this.sort(this.state.saveMovies, word, short, status)}, 1000);
+            setTimeout(() => {this.sort(this.state.tempSaveMovies, word, short, status)}, 1000);
         }
         
     }
 
 
     sort(data, word, short, status){
+        console.log(this.state.saveMovies, this.state.tempSaveMovies);
         let temp = [];
         for(let i = 0; i<data.length; i++){
             let itemRu = data[i].nameRU ? data[i].nameRU : "";
             let itemEn = data[i].nameEN ? data[i].nameEN : "";
+            itemRu = itemRu.toLowerCase();
+            itemEn = itemEn.toLowerCase();
             let itemDuration = data[i].duration;
-            if(itemRu.indexOf(`${word}`) !== -1 || itemEn.indexOf(`${word}`)!== -1){
+            if(itemRu.indexOf(`${word.toLowerCase()}`) !== -1 || itemEn.indexOf(`${word.toLowerCase()}`)!== -1){
                 if(!short){
                     temp.push(data[i]);
                 }
