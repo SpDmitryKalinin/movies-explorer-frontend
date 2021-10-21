@@ -18,7 +18,6 @@ export default class searchForm extends React.Component{
 
     searchValidation(e){        
         let value = e.target.querySelector('input').value;
-        console.log(value.length);
         if(value.length === 0){
             this.setState({
                 errorStatus: true,
@@ -76,7 +75,6 @@ export default class searchForm extends React.Component{
                         </label>
                     </div>
                 </form>
-                
             </section>
         )
     }

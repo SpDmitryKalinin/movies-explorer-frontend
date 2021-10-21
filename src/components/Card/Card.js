@@ -9,7 +9,11 @@ import { Link } from 'react-router-dom';
 export default class Card extends React.Component{
     constructor(props){
         super(props);
+        this.state ={
+            cardSaved: false
+        }
     }
+
     saveCard(e){
         e.stopPropagation();
         let card = e.target.closest('.card');
@@ -39,20 +43,22 @@ export default class Card extends React.Component{
             this.props.deleteMovie(card.id);
         }
     }
+    
     deletedMovie(e){
         e.stopPropagation();
         let card = e.target.closest('.card');
         this.props.deleteMovie(card.id);
     }
+
     render(){
         return (
-            <section className="card" id={this.props.id} onClick={(e) =>{
+            <section className={`card ${this.props.id ? "card_active": ""}`} id={this.props.id} onClick={(e) =>{
                 window.location.href = this.props.trailer;
                 }} >
                 <div className="card__img">
                     <img className="card__img-item" src={this.props.img} alt="Изображение на карточке"/>
                     <span className={this.props.status ? "card__save-message" : "card__save-message_disactive"} onClick={this.saveCard.bind(this)}>Сохранить</span>
-                    <span className={this.props.status ? "card__mark" : "card__mark__hidden"}>
+                    <span className={this.props.status ? "card__mark" : "card__mark__hidden"} onClick={this.deletedMovie.bind(this)}>
                         <img src={markimg} alt="Значок сохранено"></img>
                     </span>
                     <span className={this.props.status ? "card__mark-delete__hidden" : "card__mark-delete"} onClick={this.deletedMovie.bind(this)}>

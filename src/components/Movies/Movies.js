@@ -25,8 +25,8 @@ export default class Movies extends React.Component{
     render(){
         return (
             <section className="page-movies">
-                <SearchForm updateSearch ={this.setSearchStatus.bind(this)} onSubmit = {this.props.onSubmit} status ={this.props.status}/>
-                <CardList searchStatus ={this.state.searchStatus} status={this.props.status} movies={this.props.movies} loadingStatus ={this.props.loading} saveMovie={this.props.saveMovie} deleteMovie = {this.props.deleteMovie}/>
+                <SearchForm allMovies ={this.props.allMovies} updateSearch ={this.setSearchStatus.bind(this)} onSubmit = {this.props.onSubmit} status ={this.props.status}/>
+                <CardList allMovies ={this.props.allMovies} searchStatus ={this.state.searchStatus} status={this.props.status} movies={this.props.movies} loadingStatus ={this.props.loading} saveMovie={this.props.saveMovie} deleteMovie = {this.props.deleteMovie}/>
                 <Footer/>
             </section>
         )

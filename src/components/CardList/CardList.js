@@ -18,14 +18,17 @@ export default class CardList extends React.Component{
     }
 
     componentDidMount(){
+        
         window.addEventListener('resize', ()=>{
             this.changeCountCard();
         })
         this.changeCountCard();
     }
 
+
     componentDidUpdate(){
         let copySortArray = this.state.movies;
+        
         if(this.state.movies !== this.props.movies){
             this.setState({
                 movies: this.props.movies
@@ -82,7 +85,7 @@ export default class CardList extends React.Component{
                                 info = {item}
                                 saveMovie ={this.props.saveMovie}
                                 deleteMovie ={this.props.deleteMovie}
-                                id = {!this.props.status ? item._id : ""}
+                                id = {item._id}
                             />)
                         }))
                         :

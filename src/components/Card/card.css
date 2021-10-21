@@ -8,6 +8,7 @@
     display: none;
 }
 .card__mark{
+    cursor: pointer;
     display: none;
 }
 

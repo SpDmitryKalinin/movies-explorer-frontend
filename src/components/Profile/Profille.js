@@ -36,6 +36,9 @@ export default class Profile extends React.Component{
                 validationError: 'Некорректно введёт email'
             })
         }
+        setTimeout(() => {
+            this.allValidation()
+        }, 100);
     }
 
     changeName(e){
@@ -43,6 +46,7 @@ export default class Profile extends React.Component{
             name: e.target.value
         })
         if(e.target.value.length>=2){
+            
             this.setState({
                 validName: true
             })
@@ -53,6 +57,9 @@ export default class Profile extends React.Component{
                 validationError: 'Имя должно содержать по крайней мере два символа'
             })
         }
+        setTimeout(() => {
+            this.allValidation()
+        }, 100);
         
     }
 
@@ -93,7 +100,7 @@ export default class Profile extends React.Component{
                                     <label className="profile__input-label" for="email"></label>
                                 </div>
                                 <div className="profile__buttons">
-                                    <button className="profile__button-redact" type="submit" disabled={this.state.allValidation ? "" : "disabled"}>Редактировать 
+                                    <button className="profile__button-redact" type="submit" disabled={!this.state.allValidation || this.state.email === this.context.email && this.state.name === this.context.name}>Редактировать 
                                         <span className={`profile__error ${!this.state.validEmail || !this.state.validName ? "" : "profile__error_disable"}`}>{this.state.validationError}</span>
                                     </button>
                                     <button className="profile__button-exit" type="button" onClick={this.props.logout}>Выйти из аккаунта</button>

@@ -13,10 +13,10 @@ export default class Form extends React.Component{
             password: '',
             name: '',
             errorMessage: '',
+            loginValid: false,
+            passwordValid: false,
+            nameValid: false,
         }
-    }
-    componentDidUpdate(){
-        console.log(this.state)
     }
 
     validation(input, email){
@@ -24,24 +24,37 @@ export default class Form extends React.Component{
             if(!input.validationMessage){
                 input.nextSibling.setAttribute("style", 'display:none')
                 input.removeAttribute("style", 'color:#EE3465;')
+                console.log(input.name);
+                this.setValidation(input, true)
             }
             else{
                 input.setAttribute("style", 'color:#EE3465;')
+                input.nextSibling.setAttribute("style", 'display: block')
                 input.nextSibling.textContent = input.validationMessage;
+                this.setValidation(input, false)
             }
         }
         else{
             if(isEmail(input.value)){
                 input.nextSibling.setAttribute("style", 'display:none')
                 input.removeAttribute("style", 'color:#EE3465;')
+                this.setValidation(input, true)
+
             }
             else if(!isEmail(input.value)){
                 input.setAttribute("style", 'color:#EE3465;')
                 input.nextSibling.setAttribute("style", 'display: block;');
                 input.nextSibling.textContent = input.validationMessage;
+                this.setValidation(input, false)
             }
         }
-        
+    }
+
+    setValidation(input, value){
+        this.setState({
+            [`${input.name}Valid`]: value
+        })
+        setTimeout(()=>{console.log(this.state)}, 100)
     }
 
     changeLogin(e){
@@ -101,7 +114,7 @@ export default class Form extends React.Component{
                                 onChange={this.changeLogin.bind(this)} 
                                 value={this.state.login || ""} 
                                 className="form__email-input form__input" 
-                                type="email" id="email" name="email" 
+                                type="email" id="email" name="login" 
                                 placeholder="pochta@yandex.ru" 
                                 required
                             />
@@ -123,7 +136,7 @@ export default class Form extends React.Component{
 
                         <div className="form__button-container">
                             {this.state.errorMessage !== '' ? <span className="form__error-message">{this.state.errorMessage}</span>: ""}
-                            <button className="form__button" type="submit">{this.props.textButton}</button>
+                            <button className="form__button" type="submit" disabled={!(this.state.nameValid && this.state.passwordValid && this.state.loginValid)}>{this.props.textButton}</button>
                         </div>
 
                         <div className="form__form-footer-container">

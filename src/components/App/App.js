@@ -23,26 +23,80 @@ class App extends React.Component{
         super(props);
         this.state = {
             currentUser: {},
-            movies: [],
             sortMovies: [],
+            saveMovies: [],
             loading: false,
             login: true,
-            saveMovies: [],
             tempSaveMovies: [],
+            allMovies: []
         }
     }
+
+
     componentDidMount(){
         if(this.checkToken()){
             this.getInfoUser()
+            this.getMovies();
             this.getSaveMovies();
+            setTimeout(() => {
+                this.checkSaved()
+            }, 500);
             if(localStorage.getItem("movies")){
-                const newData = JSON.parse(localStorage.getItem('movies'));
-                this.setState(
-                {
-                    sortMovies: newData
-                });
+                setTimeout(()=>{
+                    this.storageCheck()
+                }, 200)
             }
         } 
+    }
+
+
+    storageCheck(){
+        const newData = JSON.parse(localStorage.getItem('movies'));
+        for(let i = 0;i<newData.length; i++){
+            for(let j=0; j<this.state.saveMovies.length; j++){
+                if(newData[i].id === this.state.saveMovies[j].movieId){
+                    newData[i]._id = this.state.saveMovies[j]._id;
+                }
+            }
+        }
+        this.setState(
+        {
+            sortMovies: newData
+        });
+
+    }
+
+    checkSaved(){
+        for(let i=0; i<this.state.allMovies.length; i++){
+            for(let j=0; j<this.state.saveMovies.length; j++)
+            {
+                if(this.state.allMovies[i].id === this.state.saveMovies[j].movieId){
+                    this.state.allMovies[i]._id = this.state.saveMovies[j]._id;
+                }
+            }
+        }
+        for(let i=0; i<this.state.sortMovies.length; i++){
+            for(let j=0; j<this.state.saveMovies.length; j++)
+            {
+                if(this.state.sortMovies[i].id === this.state.saveMovies[j].movieId){
+                    this.state.sortMovies[i]._id = this.state.saveMovies[j]._id;
+                }
+            }
+        }
+        if(this.state.sortMovies.length!==0){
+            setTimeout(()=>{console.log(this.state.sortMovies); localStorage.setItem('movies', JSON.stringify(this.state.sortMovies));}, 200)
+        }
+        
+        
+        
+    }
+
+    getMovies(){
+        moviesApi.getMovies().then(res =>{
+            this.setState({
+                allMovies: res
+            })
+        })
     }
 
     getInfoUser(){
@@ -131,6 +185,7 @@ class App extends React.Component{
         return api.saveMovie(country, director, duration, year, description, image, trailer, thumbnail, movieId, nameRU, nameEN)
         .then(res =>{
             this.getSaveMovies();
+            setTimeout(() => {this.checkSaved()}, 500);
             return res._id;
         })
     }
@@ -138,10 +193,24 @@ class App extends React.Component{
     deleteMovie(id){
         api.deleteMovie(id).then(res =>{
             this.getSaveMovies();
+            for(let i =0; i<this.state.allMovies.length; i++){
+                if(this.state.allMovies[i]._id === id){
+                    console.log(this.state.allMovies[i]._id)
+                    this.state.allMovies[i]._id = undefined;
+                }
+            }
+            for(let i=0; i<this.state.sortMovies.length; i++){
+                if(this.state.sortMovies[i]._id === id){
+                    this.state.sortMovies[i]._id = undefined;
+                }
+            }
+            setTimeout(() => {this.checkSaved()}, 500);
         })
         .catch(res =>{
             console.log(res);
         })
+        
+        
         
     }
 
@@ -151,25 +220,15 @@ class App extends React.Component{
             loading: true,
         })
         if(status){
-            moviesApi.getMovies()
-            .then(res =>{
-                let data = res;
-                this.setState({movies: data})
-            })
-            .catch(err =>{
-                console.log(err)
-            })
-            setTimeout(() => {this.sort(this.state.movies, word, short, status)}, 1000);
+            this.sort(this.state.allMovies, word, short, status);
         }
         else{
-            setTimeout(() => {this.sort(this.state.tempSaveMovies, word, short, status)}, 1000);
+            this.sort(this.state.tempSaveMovies, word, short, status);
         }
-        
     }
 
 
     sort(data, word, short, status){
-        console.log(this.state.saveMovies, this.state.tempSaveMovies);
         let temp = [];
         for(let i = 0; i<data.length; i++){
             let itemRu = data[i].nameRU ? data[i].nameRU : "";
@@ -178,7 +237,7 @@ class App extends React.Component{
             itemEn = itemEn.toLowerCase();
             let itemDuration = data[i].duration;
             if(itemRu.indexOf(`${word.toLowerCase()}`) !== -1 || itemEn.indexOf(`${word.toLowerCase()}`)!== -1){
-                if(!short){
+                if(short){
                     temp.push(data[i]);
                 }
                 else{
@@ -235,15 +294,16 @@ class App extends React.Component{
                             />
                         }
                         
-                        
                     </Route>
 
                     <Route path="/movies">
-                        <Movies onSubmit = {this.handleSubmitSearch.bind(this)} movies={this.state.sortMovies} status={true} loading={this.state.loading} saveMovie={this.saveMovie.bind(this)} deleteMovie={this.deleteMovie.bind(this)}/>
+                        {this.checkSaved()}
+                        <Movies allMovies={this.state.allMovies} onSubmit = {this.handleSubmitSearch.bind(this)} movies={this.state.sortMovies} status={true} loading={this.state.loading} saveMovie={this.saveMovie.bind(this)} deleteMovie={this.deleteMovie.bind(this)}/>
                     </Route>
 
                     <Route path="/saved-movies">
-                        <Movies onSubmit = {this.handleSubmitSearch.bind(this)} movies={this.state.saveMovies} status={false} loading={this.state.loading} deleteMovie={this.deleteMovie.bind(this)}/>
+                        {this.checkSaved()}
+                        <Movies allMovies={this.state.allMovies} onSubmit = {this.handleSubmitSearch.bind(this)} movies={this.state.saveMovies} status={false} loading={this.state.loading} deleteMovie={this.deleteMovie.bind(this)}/>
                     </Route>
 
                     <Route path="/profile">
