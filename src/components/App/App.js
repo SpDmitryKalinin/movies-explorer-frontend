@@ -1,6 +1,7 @@
 import React from 'react';
 import { Route, Switch, withRouter, useHistory, useLocation, Redirect} from "react-router-dom";
 import {CurrentUserContext} from './../../currentUserContext/currentUserContext';
+import {SHORTDURATION} from '../../utils/constants'
 
 
 //components
@@ -34,12 +35,18 @@ class App extends React.Component{
 
 
     componentDidMount(){
+        this.setState({
+            loading: true,
+        })
         if(this.checkToken()){
             this.getInfoUser()
             this.getMovies();
             this.getSaveMovies();
             setTimeout(() => {
                 this.checkSaved()
+                this.setState({
+                    loading: false
+                })
             }, 500);
             if(localStorage.getItem("movies")){
                 setTimeout(()=>{
@@ -85,10 +92,7 @@ class App extends React.Component{
         }
         if(this.state.sortMovies.length!==0){
             setTimeout(()=>{console.log(this.state.sortMovies); localStorage.setItem('movies', JSON.stringify(this.state.sortMovies));}, 200)
-        }
-        
-        
-        
+        } 
     }
 
     getMovies(){
@@ -238,10 +242,13 @@ class App extends React.Component{
             let itemDuration = data[i].duration;
             if(itemRu.indexOf(`${word.toLowerCase()}`) !== -1 || itemEn.indexOf(`${word.toLowerCase()}`)!== -1){
                 if(short){
-                    temp.push(data[i]);
+                    if(itemDuration<SHORTDURATION){
+                        temp.push(data[i]);
+                    }
+                    
                 }
                 else{
-                    if(itemDuration>40){
+                    if(itemDuration>SHORTDURATION){
                         temp.push(data[i]);
                     }
                 }

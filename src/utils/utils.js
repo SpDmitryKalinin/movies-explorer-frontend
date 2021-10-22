@@ -1,3 +1,6 @@
+import { VALUECARD } from "./constants"
+
+
 export const diffArrays =(arr1, arr2)=>{
     if(arr1.length !== arr2.length){
         return false
@@ -15,15 +18,15 @@ export const checkDevice = () =>{
     const mobileWidth = 768;
     const windowWidth = window.innerWidth;
     if(windowWidth >= tabletWidth){
-        return [12,3]
+        return VALUECARD.desktop
     }
 
     else if(windowWidth < tabletWidth && windowWidth >= mobileWidth){
-        return [8,2]
+        return VALUECARD.tablet
     }
 
     else if(windowWidth < mobileWidth){
-        return [5,2]
+        return VALUECARD.mobile
     }
 }
 

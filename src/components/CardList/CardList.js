@@ -8,9 +8,9 @@ export default class CardList extends React.Component{
         super(props)
         this.state = {
             viewMovies: [],
-            countMovies: 12,
-            prevCount: 12,
-            step: 3,
+            countMovies: 0,
+            prevCount: 0,
+            step: 0,
             prevSortArray: [],
             loading: false,
             movies: [],

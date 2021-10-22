@@ -19,6 +19,15 @@ export default class Form extends React.Component{
         }
     }
 
+    componentDidMount(){
+        console.log(this.props.nameStatus);
+        if(!this.props.nameStatus){
+            this.setState({
+                nameValid: true,
+            })
+        }
+    }
+
     validation(input, email){
         if(!email){
             if(!input.validationMessage){
@@ -107,7 +116,6 @@ export default class Form extends React.Component{
                     <h2 className="form-container__title">{this.props.title}</h2>
                     <form onSubmit={this.props.onSubmit.bind(this)} className="form">
                         <div className="form__inputs">
-                            
                             {nameInput}
                             <p className="form__input-label-text">E-mail</p>
                             <input
